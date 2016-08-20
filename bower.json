@@ -1,0 +1,19 @@
+{
+  "name": "boilerplate",
+  "description": "",
+  "main": "dist/index.html",
+  "authors": [
+    "John Tucker <john@larkintuckerllc.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}
