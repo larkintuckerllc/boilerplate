@@ -1,17 +1,14 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ScreensView from '../components/ScreensView';
-export default React.createClass({
-  componentDidMount: function() {
+export default class ScreensContainer extends Component {
+  componentDidMount() {
     const { screensGet } = this.props;
     screensGet();
-  },
-  render: function() {
-    return (
-      <ScreensView
-        {...this.props} />
-      );
-  },
-  propTypes: {
-    screensGet: PropTypes.func.isRequired
   }
-});
+  render() {
+    return <ScreensView {...this.props} />;
+  }
+}
+ScreensContainer.propTypes = {
+  screensGet: PropTypes.func.isRequired
+}

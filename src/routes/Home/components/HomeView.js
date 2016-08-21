@@ -1,3 +1,3 @@
 import React from 'react';
-export default () =>
-  <div>Home</div>
+const HomeView = () => <div>Home</div>
+export default HomeView;

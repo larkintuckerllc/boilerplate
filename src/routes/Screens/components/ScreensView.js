@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import {List, ListItem} from 'material-ui/List';
 const ScreensView = ({ isGetting, isGettingError, screens }) =>
   <div>
     {isGetting ?
@@ -11,11 +10,10 @@ const ScreensView = ({ isGetting, isGettingError, screens }) =>
       null
     }
     {!isGetting && !isGettingError ?
-      <List>
+      <div>
         {screens.map(screen =>
-          <ListItem key={screen.id} primaryText={screen.description} />
-        )}
-      </List> :
+          <div key={screen.id}>{screen.description}</div>)}
+      </div> :
       null
     }
   </div>
