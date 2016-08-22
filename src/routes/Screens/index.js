@@ -1,5 +1,5 @@
-import ScreensConnectContainer from './containers/ScreensConnectContainer';
+import ScreensContainer from './containers/ScreensContainer';
 export default {
   path: 'screens',
-  component: ScreensConnectContainer
+  component: ScreensContainer
 }

@@ -2,15 +2,19 @@ const find = require('lodash/find');
 const fakeDatabase = {
   screens: [{
     id: 'gcat',
+    order: 0,
     description: 'grumpy cat'
   }, {
     id: 'sdog',
+    order: 2,
     description: 'super dog'
   },{
     id: 'cbird',
+    order: 3,
     description: 'chirpy bird'
   },{
     id: 'llizard',
+    order: 1,
     description: 'lounging lizard'
   }]
 }
@@ -23,15 +27,52 @@ export const get = () =>
     */
     return fakeDatabase.screens
   });
-export const post = (id, description) =>
+export const put = (id, description, order) =>
   delay(2000).then(() => {
     /*
     throw new Error('500'); // SERVER ERROR
     */
-    if (find(fakeDatabase.screens, { id }) !== undefined) {
-      throw new Error('409'); // CONFLICTING ID
+    let newScreen;
+    const screen = find(fakeDatabase.screens, { id });
+    if (screen === undefined) {
+      throw new Error('404');
     }
-    const screen = { id, description };
-    fakeDatabase.screens.push(screen);
-    return screen;
+    const oldOrder = screen.order;
+    if (order < oldOrder) {
+        fakeDatabase.screens = fakeDatabase.screens.map(
+          o => {
+            const newO = Object.assign(
+              {},
+              o
+            );
+            newO.order = (o.order >= order && o.order < oldOrder) ?
+              o.order + 1 : o.order;
+            if (o.order === oldOrder) {
+              newO.order = order;
+              newO.description = description;
+              newScreen = newO;
+            }
+            return newO;
+          }
+        );
+    }
+    if (order > oldOrder) {
+        fakeDatabase.screens = fakeDatabase.screens.map(
+          o => {
+            const newO = Object.assign(
+              {},
+              o
+            );
+            newO.order = (o.order > oldOrder && o.order <= order) ?
+              o.order - 1 : o.order;
+            if (o.order === oldOrder) {
+              newO.order = order;
+              newO.description = description;
+              newScreen = newO;
+            }
+            return newO;
+          }
+        );
+    }
+    return newScreen;
   });

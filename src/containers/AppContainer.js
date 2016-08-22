@@ -1,7 +1,11 @@
+// TODO: BETTER HANDLE OF WRAPPING
 import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
-export default React.createClass({
+import { DragDropContext } from 'react-dnd';
+// import HTML5Backend from 'react-dnd-html5-backend';
+import TouchBackend from 'react-dnd-touch-backend';
+const AppContainer = React.createClass({
   render: function() {
     const { store, history, routes } = this.props;
     return (
@@ -16,3 +20,4 @@ export default React.createClass({
     routes: PropTypes.object.isRequired
   }
 });
+export default DragDropContext(TouchBackend)(AppContainer);
